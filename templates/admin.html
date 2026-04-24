@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Admin</title>
+<style>table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px}th{background:#28a745;color:white}</style>
+</head><body><h1>Équipes inscrites : {{ equipes|length }}</h1>
+<table><tr><th>ID</th><th>Équipe</th><th>Capitaine</th><th>Téléphone</th><th>Email</th><th>Quartier</th><th>Joueurs</th></tr>
+{% for e in equipes %}
+<tr><td>{{e[0]}}</td><td>{{e[1]}}</td><td>{{e[2]}}</td><td>{{e[3]}}</td><td>{{e[4]}}</td><td>{{e[5]}}</td><td>{{e[6]}}</td></tr>
+{% endfor %}</table><br><a href="/">Retour</a></body></html>

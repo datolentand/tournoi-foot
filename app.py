@@ -56,7 +56,25 @@ def admin():
     equipes = c.fetchall()
     conn.close()
     return render_template('admin.html', equipes=equipes)
-
+@app.route('/statistiques')
+def statistiques():
+    conn = sqlite3.connect('tournoi.db')
+    c = conn.cursor()
+    
+    c.execute("SELECT COUNT(*) FROM equipes")
+    total_equipes = c.fetchone()[0]
+    
+    c.execute("SELECT COUNT(*) FROM joueurs") 
+    total_joueurs = c.fetchone()[0]
+    
+    c.execute("SELECT COUNT(*) FROM matchs WHERE score_equipe1 IS NOT NULL")
+    matchs_joues = c.fetchone()[0]
+    
+    conn.close()
+    return render_template('statistiques.html', 
+                           equipes=total_equipes,
+                           joueurs=total_joueurs, 
+                           matchs=matchs_joues)
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get('PORT', 5000))

@@ -4,9 +4,15 @@ import os
 
 app = Flask(__name__)
 
+app = Flask(__name__)
+
+app = Flask(__name__)
+
 def init_db():
     conn = sqlite3.connect('tournoi.db')
     c = conn.cursor()
+    
+    # Table EQUIPES
     c.execute('''CREATE TABLE IF NOT EXISTS equipes
                  (id INTEGER PRIMARY KEY AUTOINCREMENT,
                   nom_equipe TEXT NOT NULL,
@@ -15,8 +21,25 @@ def init_db():
                   email TEXT NOT NULL,
                   quartier TEXT,
                   nb_joueurs INTEGER)''')
+    
+    # Table JOUEURS
+    c.execute('''CREATE TABLE IF NOT EXISTS joueurs
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  nom TEXT NOT NULL,
+                  equipe_id INTEGER)''')
+    
+    # Table MATCHS
+    c.execute('''CREATE TABLE IF NOT EXISTS matchs
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  equipe1 TEXT,
+                  equipe2 TEXT,
+                  score_equipe1 INTEGER,
+                  score_equipe2 INTEGER)''')
+    
     conn.commit()
     conn.close()
+
+init_db()  # On lance la fonction ici
 
 @app.route('/')
 def formulaire():

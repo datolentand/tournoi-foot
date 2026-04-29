@@ -98,7 +98,16 @@ def statistiques():
                            equipes=total_equipes,
                            joueurs=total_joueurs, 
                            matchs=matchs_joues)
+@app.route('/equipes')
+def liste_equipes():
+    conn = sqlite3.connect('tournoi.db')
+    c = conn.cursor()
+    c.execute("SELECT id, nom_quartier, nom_coach, telephone FROM equipes ORDER BY id DESC")
+    equipes = c.fetchall()
+    conn.close()
+    return render_template('equipes.html', equipes=equipes)
+    
 if __name__ == '__main__':
     init_db()
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.-get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)

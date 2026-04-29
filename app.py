@@ -67,7 +67,7 @@ def statistiques():
     c.execute("SELECT COUNT(*) FROM joueurs") 
     total_joueurs = c.fetchone()[0]
     
-    c.execute("SELECT COUNT(*) FROM matchs WHERE score_equipe1 IS NOT NULL")
+    c.execute("SELECT COUNT(*) FROM matchs")
     matchs_joues = c.fetchone()[0]
     
     conn.close()
